@@ -51,9 +51,9 @@ public class BallMover : MonoBehaviour {
 		}
 		float newx = direction.x * xchange;
 		float newy = direction.y * ychange;
-		Debug.Log ("old dir:" + direction);
+		//Debug.Log ("old dir:" + direction);
 		direction = new Vector3 (newx, newy, 0f);
-		Debug.Log ("new dir: " + direction);
+		//Debug.Log ("new dir: " + direction);
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
@@ -66,7 +66,6 @@ public class BallMover : MonoBehaviour {
 					//special case
 					GameObject.FindObjectOfType<GameManager> ().RespawnBall ();
 					return;
-					break;
 				case"Top":
 					bouncedir = "horizontal";
 					break;
@@ -77,12 +76,17 @@ public class BallMover : MonoBehaviour {
 					bouncedir = "vertical";
 					break;
 				case "Paddle":
+					
 					bouncedir = "horizontal";
 					break;
 				}
 				Bounce (bouncedir);
 			}
 		} else if (other.gameObject.name == "Paddle") {
+			//if ball collided below paddle, DONT BOUNCE. just return, keep it on it's trajectory
+
+			if (transform.position.y < other.transform.position.y)
+				return;
 			Bounce ("horizontal");
 		}
 
