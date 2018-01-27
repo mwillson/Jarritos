@@ -21,10 +21,7 @@ public class PaddleController : MonoBehaviour {
             InputScale *= InputMultiplier / 10.0f;
 
             //Create a new transform and set X to InputScale as defined above
-            Vector3 NewTransform;
-            NewTransform.x = InputScale;
-            NewTransform.y = 0.0f;
-            NewTransform.z = 0.0f;
+            Vector3 NewTransform = new Vector3(InputScale, 0.0f, 0.0f);
 
             //Translate the Paddle towards NewTransform
             transform.Translate(NewTransform);

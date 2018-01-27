@@ -9,8 +9,25 @@ public class TargetScript : MonoBehaviour {
     //The duration for which the above grow amount should be applied
     public float SecondsToGrow;
 
+    public float LowerXBound;
+    public float UpperXBound;
+    public float LowerYBound;
+    public float UpperYBound;
+
     //Reference to the ElectroField in the game world; defined in Start()
     public GameObject ElectroObject;
+
+    public void NudgeTarget(Vector2 NudgeVector)
+    {
+        if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
+        {
+            if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
+            {
+                Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
+                transform.Translate(TranslateVector);
+            }
+        }
+    }
 
     //Called when this target is hit by the ball
     public IEnumerator OnTargetHit()

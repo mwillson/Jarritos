@@ -20,14 +20,12 @@ public class ElectroFieldScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector2 NewVector;
-        NewVector.x = 0.0f;
-        NewVector.y = ScaleRate;
+        Vector2 ScaleVector = new Vector2(0.0f, ScaleRate);
         //Add the scale rate to our BoxCollider size
-        GetComponent<BoxCollider2D>().size += NewVector;
+        GetComponent<BoxCollider2D>().size += ScaleVector;
 
         //Adjust our offset so that it will always be anchored at the bottom
-        NewVector.y = ScaleRate / 2.0f;
-        GetComponent<BoxCollider2D>().offset += NewVector;
+        ScaleVector.y = ScaleRate / 2.0f;
+        GetComponent<BoxCollider2D>().offset += ScaleVector;
 	}
 }

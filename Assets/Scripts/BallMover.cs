@@ -12,7 +12,7 @@ public class BallMover : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		transform.Translate (direction);
 	}
 
@@ -37,8 +37,47 @@ public class BallMover : MonoBehaviour {
         if (other.GetComponent<TargetScript>())
         {
             StartCoroutine(other.GetComponent<TargetScript>().OnTargetHit());
+            Vector2 VectorToNudge = new Vector2(direction.x, direction.y);
+            other.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);
         }
 		string bouncedir="";
+
+        if (other.gameObject.name != "ElectroField")
+        {
+            /*
+            float nextx;
+            float nexty;
+            // x
+            if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) <= 0.1f)
+            {
+                bouncedir = "horizontal";
+            }
+            else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) > Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y))
+            {
+                bouncedir = "vertical";
+            }
+            else
+            {
+                bouncedir = "horizontal";
+            }
+            // y
+            */
+            if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
+            {
+                bouncedir = "horizontal";
+                Bounce(bouncedir);
+                bouncedir = "vertical";
+            }
+            else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) > Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y))
+            {
+                bouncedir = "vertical";
+            }
+            else
+            {
+                bouncedir = "horizontal";
+            }
+        }
+        /*
 		switch (other.gameObject.name) {
 		case"Bottom":
 			bouncedir = "horizontal";
@@ -55,7 +94,18 @@ public class BallMover : MonoBehaviour {
 		case "Paddle":
 			bouncedir = "horizontal";
 			break;
+        case "Target":
+            if (Mathf.Abs(other.gameObject.transform.position.x) - Mathf.Abs(transform.position.x) > Mathf.Abs(other.gameObject.transform.position.y) - Mathf.Abs(transform.position.y))
+             {
+                 bouncedir = "vertical";
+             }
+            else
+             {
+                 bouncedir = "horizontal";
+             }
+             break;
 		}
-		Bounce (bouncedir);
+        */
+        Bounce (bouncedir);
 	}
 }
