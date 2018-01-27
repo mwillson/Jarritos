@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ElectroFieldScript : MonoBehaviour {
 
+    public float ScaleRate;
     public float ShrinkRate;
 
 	// Use this for initialization
 	void Start () {
-		
+        ScaleRate = -ShrinkRate;
 	}
 	
 	// Update is called once per frame
@@ -16,9 +17,9 @@ public class ElectroFieldScript : MonoBehaviour {
     {
         Vector2 NewVector;
         NewVector.x = 0.0f;
-        NewVector.y = -ShrinkRate;
+        NewVector.y = ScaleRate;
         GetComponent<BoxCollider2D>().size += NewVector;
-        NewVector.y = -ShrinkRate / 2.0f;
+        NewVector.y = ScaleRate / 2.0f;
         GetComponent<BoxCollider2D>().offset += NewVector;
 	}
 }

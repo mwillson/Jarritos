@@ -33,7 +33,12 @@ public class BallMover : MonoBehaviour {
 		direction = new Vector3 (newx, newy, 0f);
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.GetComponent<TargetScript>())
+        {
+            //print("Hit a target");
+            StartCoroutine(other.GetComponent<TargetScript>().OnTargetHit());
+        }
 		string bouncedir="";
 		switch (other.gameObject.name) {
 		case"Bottom":
