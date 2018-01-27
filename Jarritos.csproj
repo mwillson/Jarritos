@@ -282,6 +282,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BallMover.cs" />
+    <Compile Include="Assets\Scripts\CustomCollision.cs" />
+    <Compile Include="Assets\Scripts\ElectroFieldScript.cs" />
+    <Compile Include="Assets\Scripts\PaddleController.cs" />
     <Compile Include="Assets\UIStartGame.cs" />
     <Compile Include="Assets\UITriggerSound.cs" />
     <Compile Include="Assets\UIWinGame.cs" />
