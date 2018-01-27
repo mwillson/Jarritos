@@ -281,6 +281,11 @@ Prefab:
       propertyPath: ShrinkRate
       value: 0.0003
       objectReference: {fileID: 0}
+    - target: {fileID: 61024599899822312, guid: d740d12d5c060f04badd746d9ec0effe,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d740d12d5c060f04badd746d9ec0effe, type: 2}
   m_IsPrefabParent: 0
@@ -377,15 +382,30 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4774831957854884, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.5974421
+      value: 4.0192537
       objectReference: {fileID: 0}
     - target: {fileID: 4774831957854884, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.5974421
+      value: 4.0192537
       objectReference: {fileID: 0}
     - target: {fileID: 4774831957854884, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.5974421
+      value: 4.0192537
+      objectReference: {fileID: 0}
+    - target: {fileID: 50634311331008396, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50634311331008396, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50634311331008396, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}

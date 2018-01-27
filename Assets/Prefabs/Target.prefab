@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrowAmountOnHit: 0
   SecondsToGrow: 0
+  ElectroObject: {fileID: 0}
 --- !u!212 &212628598528545312
 SpriteRenderer:
   m_ObjectHideFlags: 1

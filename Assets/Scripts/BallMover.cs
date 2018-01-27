@@ -36,7 +36,6 @@ public class BallMover : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<TargetScript>())
         {
-            //print("Hit a target");
             StartCoroutine(other.GetComponent<TargetScript>().OnTargetHit());
         }
 		string bouncedir="";
