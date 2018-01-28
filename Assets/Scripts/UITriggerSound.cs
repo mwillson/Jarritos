@@ -8,8 +8,13 @@ public class UITriggerSound : MonoBehaviour {
 
     public AudioSource sfx1;
     public AudioSource sfx2;
-    public AudioSource sfx3;
+    public AudioSource[] sfx3; // bounce
     public AudioSource sfx4;
+    public AudioSource[] sfx5; // win
+    public AudioSource sfx6;
+    public AudioSource sfx7;
+    public AudioSource sfx8;
+    public AudioSource sfx9;
     public AudioSource music1;
     public AudioSource music2;
     public AudioSource music3;
@@ -26,22 +31,33 @@ public class UITriggerSound : MonoBehaviour {
     public Text debugText;
 
     public float lastDynamicCueTime;
+    public bool rimshotTrigger;
+    public float rimshotCueTime;
 
     // Use this for initialization
     void Start () {
         dynamic_intensity = (float)0.0;
         dynamic_state = null;
         dynamic_impulse = (float)0.0;
+        dynamic_level = 1;
         lastDynamicCueTime = 0.0f;
+        rimshotTrigger = false;
+        rimshotCueTime = -1;
+        generatePattern();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Time.time > lastDynamicCueTime + 1.0) // suppress dynamic step until at least 1 seconds pass
+        if (curMusicCue == null || Time.time > lastDynamicCueTime + curMusicCue.clip.length * 0.9) // dynamic step
         {
             stepDynamicMusic();
             lastDynamicCueTime = Time.time;
+        }
+        if (rimshotCueTime >= 0 && rimshotCueTime < Time.time)
+        {
+            sfx6.Play();
+            rimshotCueTime = -1;
         }
 
         if (nextMusicCue != null || nextDynamicMusicCue != null)
@@ -80,6 +96,11 @@ public class UITriggerSound : MonoBehaviour {
                     curMusicCue = nextMusicCue;
                     nextMusicCue = null;
                 }
+                if (curMusicCue != null && rimshotTrigger)
+                {
+                    rimshotCueTime = Time.time + curMusicCue.clip.length * 3 / 4;
+                    rimshotTrigger = false;
+                }
             }
 
         }
@@ -88,12 +109,16 @@ public class UITriggerSound : MonoBehaviour {
     public float dynamic_intensity;
     public string dynamic_state;
     public float dynamic_impulse;
+    public int dynamic_level;
+    public int dynamic_pattern_idx;
+    public AudioSource[] pattern;
 
     public void cueDynamicBegin()
     {
         dynamic_state = "load";
         dynamic_intensity = (float)0.0;
         dynamic_impulse = (float)0.0;
+        dynamic_pattern_idx = 0;
         nextDynamicMusicCue = music1; // load
     }
     public void cueDynamicWin()
@@ -101,14 +126,14 @@ public class UITriggerSound : MonoBehaviour {
         dynamic_state = null;
         dynamic_intensity = (float)0.0;
         dynamic_impulse = (float)0.0;
-        nextDynamicMusicCue = music6; // lose
+        nextDynamicMusicCue = music7; // win
     }
     public void cueDynamicLose()
     {
         dynamic_state = null;
         dynamic_intensity = (float)0.0;
         dynamic_impulse = (float)0.0;
-        nextDynamicMusicCue = music7; // lose
+        nextDynamicMusicCue = music6; // lose
     }
     public void dynamicImpulseIntense()
     {
@@ -126,6 +151,18 @@ public class UITriggerSound : MonoBehaviour {
     {
         dynamic_impulse -= 0.01f;
     }
+
+    public void generatePattern()
+    {
+        pattern = new AudioSource[] { music1, music1, music1, music1, music1, music1, music1, music1 };
+        AudioSource[] options = new AudioSource[] { music1, music2, music3, music4, music5 };
+        for (int idx=0; idx < 8; idx++)
+        {
+            int musidx = Random.Range(0, options.Length);
+            pattern[idx] = options[musidx];
+        }
+    }
+
     public void stepDynamicMusic()
     {
         dynamic_intensity += dynamic_impulse;
@@ -135,12 +172,21 @@ public class UITriggerSound : MonoBehaviour {
             dynamic_intensity = (float)(dynamic_intensity * 0.99);
             if (dynamic_state == "load")
             {
-                nextDynamicMusicCue = music1; // loading
+                nextDynamicMusicCue = music8; // drums
                 dynamic_state = "gameplay";
                 dynamic_intensity = 0.0f;
             }
             else if (dynamic_state == "gameplay")
             {
+                if (dynamic_pattern_idx >= pattern.Length)
+                    dynamic_pattern_idx = 0;
+                nextDynamicMusicCue = pattern[dynamic_pattern_idx];
+                dynamic_pattern_idx += 1;
+                if (Random.Range(0,3)==0)
+                {
+                    rimshotTrigger = true;
+                }
+                /*
                 if (dynamic_intensity > 2.0)
                 {
                     nextDynamicMusicCue = music5; // intense
@@ -155,6 +201,7 @@ public class UITriggerSound : MonoBehaviour {
                     nextDynamicMusicCue = music2; // relaxed
                     dynamic_intensity = -2.0f;
                 }
+                */
             }
         }
         if (debugText != null)
@@ -171,11 +218,27 @@ public class UITriggerSound : MonoBehaviour {
     }
     public void cueSFX3()
     {
-        sfx3.Play();
+        sfx3[Random.Range(0, sfx3.Length)].Play();
     }
     public void cueSFX4()
     {
         sfx4.Play();
+    }
+    public void cueSFX5()
+    {
+        sfx5[Random.Range(0, sfx5.Length)].Play();
+    }
+    public void cueSFX6()
+    {
+        rimshotTrigger = true;
+    }
+    public void cueSFX7()
+    {
+        sfx7.Play();
+    }
+    public void cueSFX8()
+    {
+        sfx8.Play();
     }
     public void cueMusic1()
     {

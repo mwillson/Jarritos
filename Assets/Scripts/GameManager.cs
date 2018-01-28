@@ -21,16 +21,15 @@ public class GameManager : MonoBehaviour {
 		//ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
 		efscript = electrofield.GetComponent<ElectroFieldScript> ();
 		NewLevel (1, 4);
-
-        if (soundManager != null)
-        {
-            soundManager.cueDynamicBegin();
-        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        if (soundManager != null && soundManager.curMusicCue == null)
+        {
+            soundManager.cueDynamicBegin();
+        }
         //Debug.Log(ball.transform.localPosition.y);
         if (ball.transform.localPosition.y > 0.25)
         {
@@ -79,6 +78,8 @@ public class GameManager : MonoBehaviour {
 		efscript.ShrinkRate += .0001f;
 		SpawnTargets (numtargets);
 		RespawnBall ();
+        if (lvl > 1)
+            soundManager.cueSFX5();
 	}
 
 	public void SpawnTargets(int num){
