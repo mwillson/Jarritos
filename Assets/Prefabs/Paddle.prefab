@@ -78,8 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bad7c2f329dac4a94a8cd66872ce74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XPosition: 0
-  YPosition: 0
   LeftBound: -0.8
   RightBound: 0.8
   InputMultiplier: 1

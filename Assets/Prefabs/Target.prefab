@@ -83,14 +83,15 @@ MonoBehaviour:
   isNudgeable: 1
   XMovementSpeed: 0
   YMovementSpeed: 0
-  isBreakable: 0
-  numHitsToBreak: 0
   LowerXBound: -0.9
   UpperXBound: 0.9
   LowerYBound: -1.1
   UpperYBound: 1.1
   BaseNudgeAmount: 0.05
   ElectroObject: {fileID: 0}
+  soundManager: {fileID: 0}
+  isBreakable: 0
+  numHitsToBreak: 0
 --- !u!212 &212628598528545312
 SpriteRenderer:
   m_ObjectHideFlags: 1

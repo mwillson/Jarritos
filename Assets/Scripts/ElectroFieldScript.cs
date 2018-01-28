@@ -14,7 +14,7 @@ public class ElectroFieldScript : MonoBehaviour {
 
     public float MaxStackedSeconds = 10.0f;
 
-    public float MaxGrowthRate = 0.005f;
+    public float MaxGrowthRate = 0.0005f;
 
     public UITriggerSound soundManager;
 
