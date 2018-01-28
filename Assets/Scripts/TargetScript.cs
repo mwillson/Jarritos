@@ -12,6 +12,9 @@ public class TargetScript : MonoBehaviour {
     private float StackedSeconds;
 
     public bool isNudgeable = true;
+    public float BaseNudgeAmount = 0.05f;
+    public float XNudgeThreshold;
+    public float YNudgeThreshold;
 
     private bool moveRight = true;
 
@@ -27,7 +30,7 @@ public class TargetScript : MonoBehaviour {
     public float UpperXBound;
     public float LowerYBound;
     public float UpperYBound;
-    public float BaseNudgeAmount = 0.05f;
+
 
     //Reference to the ElectroField in the game world; defined in Start()
     public GameObject ElectroObject;

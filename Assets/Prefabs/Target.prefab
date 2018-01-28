@@ -81,13 +81,15 @@ MonoBehaviour:
   GrowAmountOnHit: 0.00025
   SecondsToGrow: 2
   isNudgeable: 1
+  BaseNudgeAmount: 0.05
+  XNudgeThreshold: 0.3
+  YNudgeThreshold: 0.5
   XMovementSpeed: 0
   YMovementSpeed: 0
   LowerXBound: -0.9
   UpperXBound: 0.9
   LowerYBound: -1.1
   UpperYBound: 1.1
-  BaseNudgeAmount: 0.05
   ElectroObject: {fileID: 0}
   soundManager: {fileID: 0}
   isBreakable: 0
