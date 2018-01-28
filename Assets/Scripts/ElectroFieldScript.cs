@@ -36,9 +36,9 @@ public class ElectroFieldScript : MonoBehaviour {
         ScaleVector.y = ScaleRate / 2.0f;
         GetComponent<BoxCollider2D>().offset += ScaleVector;
 
-        GetComponent<SpriteRenderer> ().size = new Vector2(1f,GetComponent<BoxCollider2D> ().size.y + GetComponent<BoxCollider2D>().offset.y*2f);
+        GetComponent<SpriteRenderer> ().size = new Vector2(1f,Mathf.Max(0f, GetComponent<BoxCollider2D> ().size.y + GetComponent<BoxCollider2D>().offset.y*2f));
 
-        if (GetComponent<SpriteRenderer> ().size.y <= 0f) {
+        if (GetComponent<SpriteRenderer> ().size.y <= 0.00001f) {
 			GameObject.FindObjectOfType<GameManager>().GameOver ();
 		}
 	}
@@ -83,12 +83,16 @@ public class ElectroFieldScript : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other){
 		if (other.gameObject.GetComponent<BallMover>() != null) {
 			other.GetComponent<BallMover> ().JumpOut ();
-		}
-	}
+            if (soundManager != null)
+            {
+                soundManager.cueSFX3();
+            }
+        }
+    }
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.GetComponent<BallMover>() != null) {
 			other.GetComponent<BallMover> ().BackIn();
-		}
-	}
+        }
+    }
 }

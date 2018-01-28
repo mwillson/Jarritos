@@ -96,12 +96,12 @@ public class TargetScript : MonoBehaviour {
     //Called when this target is hit by the ball
     public void OnTargetHit()
     {
-        //If we can get the ElectroFieldScript component
-        if (ElectroObject.GetComponent<ElectroFieldScript>())
+        //If we can get the ElectroFieldScript component (sometimes we have a collision on frame 1 before Start() is called)
+        if (ElectroObject != null && ElectroObject.GetComponent<ElectroFieldScript>())
         {
             if (soundManager != null)
             {
-                //soundManager.dynamicImpulseCalm();
+                soundManager.cueSFX3();
             }
             StartCoroutine(ElectroObject.GetComponent<ElectroFieldScript>().StartGrowTimer(SecondsToGrow, GrowAmountOnHit));
         }

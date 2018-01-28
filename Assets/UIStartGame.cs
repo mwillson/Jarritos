@@ -15,13 +15,28 @@ public class UIStartGame : MonoBehaviour {
 		
 	}
 
+    public UITriggerSound soundManager;
+
     public void onClick()
     {
-        SceneManager.LoadScene("Scenes/marktest", LoadSceneMode.Single);
+        StartCoroutine(start2());
     }
 
     public void soundTest()
     {
+        StartCoroutine(soundtest2());
+    }
+
+    IEnumerator start2()
+    {
+        soundManager.cueSFX4();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Scenes/marktest", LoadSceneMode.Single);
+    }
+    IEnumerator soundtest2()
+    {
+        soundManager.cueSFX1();
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Scenes/soundboard", LoadSceneMode.Single);
     }
 

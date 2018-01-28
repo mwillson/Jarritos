@@ -435,6 +435,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82123272985355726, guid: 9eff97eb36299b34299b6fc861cab1c9,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9eff97eb36299b34299b6fc861cab1c9, type: 2}
   m_IsPrefabParent: 0
@@ -628,6 +633,16 @@ Prefab:
       propertyPath: LowerXBound
       value: -0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 739484863}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: ElectroObject
+      value: 
+      objectReference: {fileID: 618554189}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0
