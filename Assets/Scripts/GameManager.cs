@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour {
 			float xpos = Random.Range (-.9f, .9f);
 			float ypos = Random.Range (-.6f, .8f);
 			GameObject newTarget = Instantiate (targetPrefab, new Vector3 (xpos, ypos, 0f), transform.rotation);
+			float scaleFactor = 1.2f - Random.Range (0f, level / 20f);
+			newTarget.transform.localScale *= scaleFactor;
+			newTarget.GetComponent<TargetScript> ().SecondsToGrow = 1f - (level/30f) + (1/scaleFactor);
 			targets.Add (newTarget);
 		}
 	}

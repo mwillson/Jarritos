@@ -51,7 +51,7 @@ public class CustomCollision : MonoBehaviour {
         return x + w / 2;
     }
 
-    private ComputedMotion cm;
+	private ComputedMotion cm = new ComputedMotion ();
 
     private ComputedMotion getMotion(int motion)
     {

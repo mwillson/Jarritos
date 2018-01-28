@@ -10,6 +10,7 @@ public class BallMover : MonoBehaviour {
 	Rigidbody2D myRB { get; set; }
 	Transform nextLvl;
 	GameManager gm;
+	ElectroFieldScript efscript;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,7 @@ public class BallMover : MonoBehaviour {
 		myRB = GetComponent<Rigidbody2D> ();
 		nextLvl = GameObject.Find ("NextLvl").transform;
 		gm = GameObject.FindObjectOfType<GameManager> ();
+		efscript = GameObject.FindObjectOfType<ElectroFieldScript> ();
 	}
 
 	void FixedUpdate(){
@@ -35,8 +37,24 @@ public class BallMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (transform.position.y > nextLvl.position.y) {
-			gm.NewLevel (gm.level + 1, 4);
+			int upper = 0;
+			int lower = 0;
+			if (gm.level <= 5) {
+				lower = 1;
+				upper = 3;
+			} else if (gm.level <= 10) {
+				lower = 2;
+				upper = 5;
+			} else if (gm.level <= 20) {
+				lower = 4;
+				upper = 7;
+			} else {
+				lower = 6;
+				upper = 9;
+			}
+			gm.NewLevel (gm.level + 1, 2 + Random.Range(lower,upper));
 		}
+
 		if (outOfField) {
 			return;
 		}
@@ -55,6 +73,9 @@ public class BallMover : MonoBehaviour {
 			//flip y direction
 			xchange = -1f;
 			break;
+        case "ontop":
+            xchange = 1f;
+            break;
 		}
 		float newx = direction.x * xchange;
 		float newy = direction.y * ychange;
@@ -75,8 +96,20 @@ public class BallMover : MonoBehaviour {
                 Debug.Log(other.gameObject.name);
                 switch (other.gameObject.name)
                 {
-                    case "Bottom":
+				case "Bottom":
                         //special case
+					float penaltyRate = 0f;
+						if (gm.level <= 5)
+							penaltyRate = -.0008f;
+						else if (gm.level <= 10)
+							penaltyRate = -.002F;
+						else if (gm.level <= 20)
+							penaltyRate = -.003F;
+						else if (gm.level <= 30)
+							penaltyRate = -.006F;
+						else if (gm.level <= 40)
+							penaltyRate = -.01F;
+						StartCoroutine(GameObject.FindObjectOfType<ElectroFieldScript>().StartGrowTimer(.5f, penaltyRate));
                         GameObject.FindObjectOfType<GameManager>().RespawnBall();
                         return;
                     case "Top":
@@ -110,7 +143,11 @@ public class BallMover : MonoBehaviour {
         if (other.gameObject.GetComponent<TargetScript>() != null)
         {
             string bouncedir = "";
-            if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
+            if (transform.position.y > other.transform.position.y)
+            {
+                bouncedir = "ontop";
+            }
+            else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
             {
                 bouncedir = "horizontal";
                 Bounce(bouncedir);
@@ -146,12 +183,9 @@ public class BallMover : MonoBehaviour {
 		
 	public void BackIn(){
 		if (outOfField) {
-			Debug.Log ("back in!");
 			myRB.gravityScale = 0f;
 			direction = new Vector3 (direction.x, direction.y * -1f, 0f);
-			Debug.Log ("direction back in:" + direction);
 			outOfField = false;
-			//myRB.bodyType = RigidbodyType2D.Kinematic;
 		}
 	}
 
@@ -162,7 +196,6 @@ public class BallMover : MonoBehaviour {
 	}
 
 	public void JumpOut(){
-		Debug.Log (direction * 100f);
 		outOfField = true;
 		myRB.velocity = new Vector3 (0f, 0f, 0f);
 		myRB.gravityScale = 1f;

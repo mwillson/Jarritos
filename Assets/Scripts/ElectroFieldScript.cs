@@ -56,10 +56,10 @@ public class ElectroFieldScript : MonoBehaviour {
 
         else
         {
-            if (ScaleRate + GrowAmountOnHit <= MaxGrowthRate)
-                ScaleRate += GrowAmountOnHit;
-            if (StackedSeconds + InSeconds <= MaxStackedSeconds)
-                StackedSeconds += InSeconds;
+			if (ScaleRate + GrowAmountOnHit <= MaxGrowthRate)
+				ScaleRate += GrowAmountOnHit;
+			if (StackedSeconds + InSeconds <= MaxStackedSeconds)
+				StackedSeconds += InSeconds;
             //Set a timer
             yield return new WaitForSeconds(StackedSeconds);
             StackedSeconds -= InSeconds;
