@@ -48,6 +48,9 @@ public class BallMover : MonoBehaviour {
 			//flip y direction
 			xchange = -1f;
 			break;
+        case "ontop":
+            xchange = 1f;
+            break;
 		}
 		float newx = direction.x * xchange;
 		float newy = direction.y * ychange;
@@ -103,7 +106,11 @@ public class BallMover : MonoBehaviour {
         if (other.gameObject.GetComponent<TargetScript>() != null)
         {
             string bouncedir = "";
-            if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
+            if (transform.position.y > other.transform.position.y)
+            {
+                bouncedir = "ontop";
+            }
+            else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
             {
                 bouncedir = "horizontal";
                 Bounce(bouncedir);
@@ -144,7 +151,6 @@ public class BallMover : MonoBehaviour {
 			direction = new Vector3 (direction.x, direction.y * -1f, 0f);
 			Debug.Log ("direction back in:" + direction);
 			outOfField = false;
-			//myRB.bodyType = RigidbodyType2D.Kinematic;
 		}
 	}
 

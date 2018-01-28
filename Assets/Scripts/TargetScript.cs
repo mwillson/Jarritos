@@ -11,6 +11,8 @@ public class TargetScript : MonoBehaviour {
 
     private float StackedSeconds;
 
+    private bool isCollidingWithOtherTarget;
+
     public float LowerXBound;
     public float UpperXBound;
     public float LowerYBound;
@@ -26,8 +28,11 @@ public class TargetScript : MonoBehaviour {
         {
             if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
             {
-                Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
-                transform.Translate(TranslateVector);
+                if (!isCollidingWithOtherTarget)
+                {
+                    Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
+                    transform.Translate(TranslateVector);
+                }
             }
         }
     }
@@ -48,9 +53,19 @@ public class TargetScript : MonoBehaviour {
         //Get the ElectroField from the game world
         ElectroObject = GameObject.Find("ElectroField");
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.GetComponent<TargetScript>())
+        {
+            isCollidingWithOtherTarget = true;
+        }
+        else
+            isCollidingWithOtherTarget = false;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
