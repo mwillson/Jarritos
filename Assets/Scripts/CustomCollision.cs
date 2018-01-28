@@ -53,7 +53,7 @@ public class CustomCollision : MonoBehaviour {
 
     private ComputedMotion getMotion(int motion)
     {
-        ComputedMotion cm;
+		ComputedMotion cm = new ComputedMotion();
         cm.vx = 0;
         cm.vy = 0;
         cm.motion = motion;

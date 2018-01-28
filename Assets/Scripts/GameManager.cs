@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -20,5 +21,9 @@ public class GameManager : MonoBehaviour {
 	public void RespawnBall(){
 		Destroy (ball);
 		ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
+	}
+
+	public void GameOver(){
+		SceneManager.LoadScene ("title");
 	}
 }
