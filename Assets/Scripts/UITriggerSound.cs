@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class UITriggerSound : MonoBehaviour {
 
-    public AudioSource sfx;
+    public AudioSource sfx1;
+    public AudioSource sfx2;
+    public AudioSource sfx3;
+    public AudioSource sfx4;
     public AudioSource music1;
     public AudioSource music2;
     public AudioSource music3;
@@ -158,9 +161,21 @@ public class UITriggerSound : MonoBehaviour {
             debugText.text = "Intensity: " + dynamic_intensity.ToString();
     }
 
-    public void cueSFX()
+    public void cueSFX1()
     {
-        sfx.Play();    
+        sfx1.Play();    
+    }
+    public void cueSFX2()
+    {
+        sfx2.Play();
+    }
+    public void cueSFX3()
+    {
+        sfx3.Play();
+    }
+    public void cueSFX4()
+    {
+        sfx4.Play();
     }
     public void cueMusic1()
     {

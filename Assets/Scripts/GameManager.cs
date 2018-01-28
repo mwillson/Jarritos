@@ -48,14 +48,26 @@ public class GameManager : MonoBehaviour {
 			Destroy (ball);
 		}
 		ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
+        if (soundManager != null)
+        {
+            soundManager.cueSFX2();
+        }
     }
 
     public void GameOver(){
-        soundManager.cueDynamicLose();
-        SceneManager.LoadScene ("title");
+        StartCoroutine(gameover2());
 	}
+    IEnumerator gameover2()
+    {
+        soundManager.cueDynamicLose();
+        while(soundManager.curMusicCue != null && soundManager.curMusicCue.isPlaying)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        SceneManager.LoadScene("title", LoadSceneMode.Single);
+    }
 
-	public void NewLevel(int lvl, int numtargets){
+    public void NewLevel(int lvl, int numtargets){
 		level = lvl;
 		Debug.Log ("New Level:"+lvl);
 		string lvlString = (lvl + 1).ToString();
