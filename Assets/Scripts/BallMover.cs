@@ -8,6 +8,8 @@ public class BallMover : MonoBehaviour {
 	Collider2D electroCollider;
 	bool outOfField;
 	Rigidbody2D myRB { get; set; }
+	Transform nextLvl;
+	GameManager gm;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +17,8 @@ public class BallMover : MonoBehaviour {
 		direction = new Vector3 (Random.Range(-.5f,.5f), -1.2f, 0f);
 		electroCollider = GameObject.Find ("ElectroField").GetComponent<BoxCollider2D> ();
 		myRB = GetComponent<Rigidbody2D> ();
+		nextLvl = GameObject.Find ("NextLvl").transform;
+		gm = GameObject.FindObjectOfType<GameManager> ();
 	}
 
 	void FixedUpdate(){
@@ -30,6 +34,9 @@ public class BallMover : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (transform.position.y > nextLvl.position.y) {
+			gm.NewLevel (gm.level + 1, 4);
+		}
 		if (outOfField) {
 			return;
 		}

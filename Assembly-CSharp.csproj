@@ -60,6 +60,7 @@
      <Compile Include="Assets\UIStartGame.cs" />
      <Compile Include="Assets\UITriggerSound.cs" />
      <Compile Include="Assets\UIWinGame.cs" />
+     <None Include="Assets\Fonts\1001fonts-grenadier-eula.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity2017_1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -51,4 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e809b9bcf9f373a42b61d4f376f3150a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 0}
+  ballPrefab: {fileID: 1822974436982468, guid: 7ee6164aa0a14044a854120f73d8a422, type: 2}
+  targetPrefab: {fileID: 1059634102000898, guid: 72b1071c61b08da4eb3dfa38b246291d,
+    type: 2}
+  targets: []
+  level: 0
