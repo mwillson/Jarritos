@@ -301,6 +301,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1972390153639204, guid: 517a85d35f87e6a47a840cafebb05d29, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 517a85d35f87e6a47a840cafebb05d29, type: 2}
   m_IsPrefabParent: 0
@@ -399,6 +403,16 @@ Prefab:
         type: 2}
       propertyPath: UpperYBound
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61632347801953270, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: BaseNudgeAmount
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}

@@ -28,4 +28,17 @@ public class ElectroFieldScript : MonoBehaviour {
         ScaleVector.y = ScaleRate / 2.0f;
         GetComponent<BoxCollider2D>().offset += ScaleVector;
 	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.gameObject.name == "Ball") {
+			other.GetComponent<BallMover> ().JumpOut ();
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.name == "Ball") {
+			other.GetComponent<BallMover> ().BackIn();
+		}
+	}
+
 }

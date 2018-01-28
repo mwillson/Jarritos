@@ -13,16 +13,20 @@ public class TargetScript : MonoBehaviour {
     public float UpperXBound;
     public float LowerYBound;
     public float UpperYBound;
+    public float BaseNudgeAmount = 0.05f;
 
     //Reference to the ElectroField in the game world; defined in Start()
     public GameObject ElectroObject;
 
     public void NudgeTarget(Vector2 NudgeVector)
     {
+        print("NudgeX:" + NudgeVector.x);
+        print("NudgeY:" + NudgeVector.y);
         if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
         {
             if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
             {
+                print("Target nudged");
                 Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
                 transform.Translate(TranslateVector);
             }
