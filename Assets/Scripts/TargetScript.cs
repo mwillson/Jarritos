@@ -21,6 +21,12 @@ public class TargetScript : MonoBehaviour {
 
     public float YMovementSpeed;
 
+    public bool isBreakable;
+
+    public int numHitsToBreak;
+
+    private int numHitsTaken;
+
     private bool isCollidingWithOtherTarget;
 
     public float LowerXBound;
@@ -95,8 +101,23 @@ public class TargetScript : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start ()
+    public void AddHitToTarget()
+    {
+        if (isBreakable)
+        {
+            numHitsTaken++;
+            if (numHitsTaken >= numHitsToBreak)
+                BreakTarget();
+        }
+    }
+
+    public void BreakTarget()
+    {
+        Destroy(gameObject);
+    }
+
+    // Use this for initialization
+    void Start ()
     {
         //Get the ElectroField from the game world
         ElectroObject = GameObject.Find("ElectroField");
