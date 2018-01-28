@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UITriggerSound : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class UITriggerSound : MonoBehaviour {
     public AudioSource curMusicCue;
     public AudioSource nextMusicCue;
     public AudioSource nextDynamicMusicCue;
+
+    public Text debugText;
+
     public float lastDynamicCueTime;
 
     // Use this for initialization
@@ -31,7 +35,7 @@ public class UITriggerSound : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Time.time > lastDynamicCueTime + 4.0) // suppress dynamic step until at least 4 seconds pass
+        if (Time.time > lastDynamicCueTime + 1.0) // suppress dynamic step until at least 1 seconds pass
         {
             stepDynamicMusic();
             lastDynamicCueTime = Time.time;
@@ -105,11 +109,19 @@ public class UITriggerSound : MonoBehaviour {
     }
     public void dynamicImpulseIntense()
     {
-        dynamic_impulse += 1f;
+        dynamic_impulse += 1.5f;
     }
     public void dynamicImpulseCalm()
     {
-        dynamic_impulse -= 1f;
+        dynamic_impulse -= 1.5f;
+    }
+    public void dynamicImpulseIntense2()
+    {
+        dynamic_impulse += 0.013f;
+    }
+    public void dynamicImpulseCalm2()
+    {
+        dynamic_impulse -= 0.01f;
     }
     public void stepDynamicMusic()
     {
@@ -117,7 +129,7 @@ public class UITriggerSound : MonoBehaviour {
         dynamic_impulse = 0.0f;
         if (dynamic_state != null)
         {
-            dynamic_intensity = (float)(dynamic_intensity * 0.8);
+            dynamic_intensity = (float)(dynamic_intensity * 0.99);
             if (dynamic_state == "load")
             {
                 nextDynamicMusicCue = music1; // loading
@@ -126,16 +138,24 @@ public class UITriggerSound : MonoBehaviour {
             }
             else if (dynamic_state == "gameplay")
             {
-                if (dynamic_intensity > 1.0)
+                if (dynamic_intensity > 2.0)
+                {
                     nextDynamicMusicCue = music5; // intense
-                else if (dynamic_intensity > 0.5)
+                    dynamic_intensity = 2.0f;
+                }
+                else if (dynamic_intensity > 1.0)
                     nextDynamicMusicCue = music4; // challenging
-                else if (dynamic_intensity > -0.5)
+                else if (dynamic_intensity > -1.0)
                     nextDynamicMusicCue = music3; // 
-                else if (dynamic_intensity < -0.5)
+                else if (dynamic_intensity < -2.0)
+                {
                     nextDynamicMusicCue = music2; // relaxed
+                    dynamic_intensity = -2.0f;
+                }
             }
         }
+        if (debugText != null)
+            debugText.text = "Intensity: " + dynamic_intensity.ToString();
     }
 
     public void cueSFX()

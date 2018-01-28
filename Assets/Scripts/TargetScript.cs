@@ -32,6 +32,8 @@ public class TargetScript : MonoBehaviour {
     //Reference to the ElectroField in the game world; defined in Start()
     public GameObject ElectroObject;
 
+    public UITriggerSound soundManager;
+
     public void MoveTarget()
     {
         if (XMovementSpeed > 0f)
@@ -91,6 +93,10 @@ public class TargetScript : MonoBehaviour {
         //If we can get the ElectroFieldScript component
         if (ElectroObject.GetComponent<ElectroFieldScript>())
         {
+            if (soundManager != null)
+            {
+                //soundManager.dynamicImpulseCalm();
+            }
             StartCoroutine(ElectroObject.GetComponent<ElectroFieldScript>().StartGrowTimer(SecondsToGrow, GrowAmountOnHit));
         }
     }
@@ -100,6 +106,7 @@ public class TargetScript : MonoBehaviour {
     {
         //Get the ElectroField from the game world
         ElectroObject = GameObject.Find("ElectroField");
+        soundManager = GameObject.Find("SoundController").GetComponent<UITriggerSound>();
 
         moveRight = true;
         moveUp = true;

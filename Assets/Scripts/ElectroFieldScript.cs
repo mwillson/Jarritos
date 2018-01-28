@@ -16,6 +16,8 @@ public class ElectroFieldScript : MonoBehaviour {
 
     public float MaxGrowthRate = 0.005f;
 
+    public UITriggerSound soundManager;
+
     // Use this for initialization
     void Start()
     {
@@ -23,8 +25,7 @@ public class ElectroFieldScript : MonoBehaviour {
         ScaleRate = -ShrinkRate;
     }
 
-
-        // Update is called once per frame
+    // Update is called once per frame
     void Update ()
     {
         Vector2 ScaleVector = new Vector2(0.0f, ScaleRate);
@@ -35,10 +36,9 @@ public class ElectroFieldScript : MonoBehaviour {
         ScaleVector.y = ScaleRate / 2.0f;
         GetComponent<BoxCollider2D>().offset += ScaleVector;
 
-
         GetComponent<SpriteRenderer> ().size = new Vector2(1f,GetComponent<BoxCollider2D> ().size.y + GetComponent<BoxCollider2D>().offset.y*2f);
 
-		if (GetComponent<SpriteRenderer> ().size.y <= 0f) {
+        if (GetComponent<SpriteRenderer> ().size.y <= 0f) {
 			GameObject.FindObjectOfType<GameManager>().GameOver ();
 		}
 	}
@@ -48,6 +48,10 @@ public class ElectroFieldScript : MonoBehaviour {
         //Temporarily set the ElectroField to grow by GrowAmount
         if (ScaleRate <= 0.0f)
         {
+            if (soundManager != null)
+            {
+                //soundManager.dynamicImpulseCalm();
+            }
             ScaleRate = GrowAmountOnHit;
             StackedSeconds = InSeconds;
             //Set a timer
@@ -67,7 +71,13 @@ public class ElectroFieldScript : MonoBehaviour {
 
         //When the timer is up, set the ElectroField to shrink again
         if (StackedSeconds <= InSeconds)
+        {
             ScaleRate = -ShrinkRate;
+            if (soundManager != null)
+            {
+                //soundManager.dynamicImpulseIntense();
+            }
+        }
     }
 
 	void OnTriggerExit2D(Collider2D other){
