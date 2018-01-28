@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059634102000898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.589, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.088944, y: 1.088944, z: 1.088944}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,8 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ea8934c2c27f64eb54e7687ccac53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrowAmountOnHit: 0
-  SecondsToGrow: 0
+  GrowAmountOnHit: 0.00025
+  SecondsToGrow: 2
+  LowerXBound: -0.9
+  UpperXBound: 0.9
+  LowerYBound: -1.1
+  UpperYBound: 1.1
+  BaseNudgeAmount: 0.05
   ElectroObject: {fileID: 0}
 --- !u!212 &212628598528545312
 SpriteRenderer:
