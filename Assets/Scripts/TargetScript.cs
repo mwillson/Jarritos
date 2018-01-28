@@ -38,10 +38,11 @@ public class TargetScript : MonoBehaviour {
     public UITriggerSound soundManager;
 
     public bool isBreakable;
-
-    public int numHitsToBreak;
-
+    public int numHitsToBreak = 3;
+    public float TimeBetweenBreakAndDestroy;
     private int numHitsTaken;
+    public Sprite[] BreakSprites;
+    public Sprite FinalBreakSprite;
 
     public void MoveTarget()
     {
@@ -116,11 +117,14 @@ public class TargetScript : MonoBehaviour {
         }
     }
 
+    //Adds a break/damage to the target
     public void AddHitToTarget()
     {
         if (isBreakable)
         {
             numHitsTaken++;
+            if (numHitsTaken < BreakSprites.Length && BreakSprites[numHitsTaken] != null)
+                GetComponent<SpriteRenderer>().sprite = BreakSprites[numHitsTaken];
             if (numHitsTaken >= numHitsToBreak)
                 BreakTarget();
         }
@@ -128,7 +132,17 @@ public class TargetScript : MonoBehaviour {
 
     public void BreakTarget()
     {
+        if (FinalBreakSprite != null)
+        {
+            GetComponent<SpriteRenderer>().sprite = FinalBreakSprite;
+        }
+        BreakTargetWait(TimeBetweenBreakAndDestroy);
         Destroy(gameObject);
+    }
+
+    public IEnumerator BreakTargetWait(float InSeconds)
+    {
+        yield return new WaitForSeconds(InSeconds);
     }
 
     // Use this for initialization

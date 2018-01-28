@@ -84,6 +84,9 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   isBreakable: 0
   numHitsToBreak: 0
+  TimeBetweenBreakAndDestroy: 0
+  BreakSprites: []
+  FinalBreakSprite: {fileID: 0}
 --- !u!212 &212628598528545312
 SpriteRenderer:
   m_ObjectHideFlags: 1
