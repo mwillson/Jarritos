@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,48 +34,12 @@ public class TargetScript : MonoBehaviour {
 
     public UITriggerSound soundManager;
 
-=======
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TargetScript : MonoBehaviour {
-
-    //The amount that the ElectroField should grow when this target is hit
-    public float GrowAmountOnHit;
-    //The duration for which the above grow amount should be applied
-    public float SecondsToGrow;
-
-    private float StackedSeconds;
-
-    public bool isNudgeable = true;
-
-    private bool moveRight = true;
-
-    private bool moveUp = true;
-
-    public float XMovementSpeed;
-
-    public float YMovementSpeed;
-
     public bool isBreakable;
 
     public int numHitsToBreak;
 
     private int numHitsTaken;
 
-    private bool isCollidingWithOtherTarget;
-
-    public float LowerXBound;
-    public float UpperXBound;
-    public float LowerYBound;
-    public float UpperYBound;
-    public float BaseNudgeAmount = 0.05f;
-
-    //Reference to the ElectroField in the game world; defined in Start()
-    public GameObject ElectroObject;
-
->>>>>>> 87af266bf3b4f1b818226656c92ade1a9ed8c5a2
     public void MoveTarget()
     {
         if (XMovementSpeed > 0f)
@@ -142,12 +105,6 @@ public class TargetScript : MonoBehaviour {
             }
             StartCoroutine(ElectroObject.GetComponent<ElectroFieldScript>().StartGrowTimer(SecondsToGrow, GrowAmountOnHit));
         }
-<<<<<<< HEAD
-    }
-
-	// Use this for initialization
-	void Start ()
-=======
     }
 
     public void AddHitToTarget()
@@ -167,7 +124,6 @@ public class TargetScript : MonoBehaviour {
 
     // Use this for initialization
     void Start ()
->>>>>>> 87af266bf3b4f1b818226656c92ade1a9ed8c5a2
     {
         //Get the ElectroField from the game world
         ElectroObject = GameObject.Find("ElectroField");
