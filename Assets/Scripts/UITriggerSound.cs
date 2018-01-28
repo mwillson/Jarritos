@@ -111,7 +111,7 @@ public class UITriggerSound : MonoBehaviour {
     public float dynamic_impulse;
     public int dynamic_level;
     public int dynamic_pattern_idx;
-    public AudioSource[] pattern;
+    public AudioSource[][] pattern;
 
     public void cueDynamicBegin()
     {
@@ -152,24 +152,62 @@ public class UITriggerSound : MonoBehaviour {
         dynamic_impulse -= 0.01f;
     }
 
+    public void dynamicIntensityWinning()
+    {
+        dynamic_intensity = -1.0f;
+    }
+
+    public void dynamicIntensityLosing()
+    {
+        dynamic_intensity = 1.0f;
+    }
+
+    public void dynamicIntensityNeutral()
+    {
+        dynamic_intensity = 0.0f;
+    }
+
     public void generatePattern()
     {
-        pattern = new AudioSource[] { music1, music1, music1, music1, music1, music1, music1, music1 };
-        AudioSource[] options = new AudioSource[] { music1, music2, music3, music4, music5 };
-        for (int idx=0; idx < 8; idx++)
+        pattern = new AudioSource[3][];
+
+        pattern[0] = new AudioSource[] { music1, music1, music1, music1, music1, music1, music1, music1 };
+        pattern[1] = new AudioSource[] { music1, music1, music1, music1, music1, music1, music1, music1 };
+        pattern[2] = new AudioSource[] { music1, music1, music1, music1, music1, music1, music1, music1 };
+
+        AudioSource[] winningoptions = new AudioSource[] { music1, music3, music3, music4, music5, music5};
+        AudioSource[] losingoptions = new AudioSource[] { music1, music2, music2, music3, music4, music4};
+        AudioSource[] options = new AudioSource[] { music1, music1, music2, music3, music3, music4, music5 };
+        for (int intense=0; intense < 3; intense++)
         {
-            int musidx = Random.Range(0, options.Length);
-            pattern[idx] = options[musidx];
+            for (int idx = 0; idx < 8; idx++)
+            {
+                if (intense == 0)
+                {
+                    int musidx = Random.Range(0, losingoptions.Length);
+                    pattern[intense][idx] = losingoptions[musidx];
+                }
+                if (intense == 1)
+                {
+                    int musidx = Random.Range(0, options.Length);
+                    pattern[intense][idx] = options[musidx];
+                }
+                if (intense == 2)
+                {
+                    int musidx = Random.Range(0, winningoptions.Length);
+                    pattern[intense][idx] = winningoptions[musidx];
+                }
+            }
         }
     }
 
     public void stepDynamicMusic()
     {
-        dynamic_intensity += dynamic_impulse;
+        //dynamic_intensity += dynamic_impulse;
         dynamic_impulse = 0.0f;
         if (dynamic_state != null)
         {
-            dynamic_intensity = (float)(dynamic_intensity * 0.99);
+            //dynamic_intensity = (float)(dynamic_intensity * 0.99);
             if (dynamic_state == "load")
             {
                 nextDynamicMusicCue = music8; // drums
@@ -180,7 +218,18 @@ public class UITriggerSound : MonoBehaviour {
             {
                 if (dynamic_pattern_idx >= pattern.Length)
                     dynamic_pattern_idx = 0;
-                nextDynamicMusicCue = pattern[dynamic_pattern_idx];
+                if (dynamic_intensity < 0f)
+                {
+                    nextDynamicMusicCue = pattern[2][dynamic_pattern_idx];
+                }
+                else if (dynamic_intensity > 0f)
+                {
+                    nextDynamicMusicCue = pattern[0][dynamic_pattern_idx];
+                }
+                else
+                {
+                    nextDynamicMusicCue = pattern[1][dynamic_pattern_idx];
+                }
                 dynamic_pattern_idx += 1;
                 if (Random.Range(0,3)==0)
                 {

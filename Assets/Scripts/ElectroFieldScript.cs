@@ -20,6 +20,9 @@ public class ElectroFieldScript : MonoBehaviour {
 
     public UITriggerSound soundManager;
 
+    public float NearLosingScale;
+    public float NearWinningScale;
+
     // Use this for initialization
     void Start()
     {
@@ -43,7 +46,23 @@ public class ElectroFieldScript : MonoBehaviour {
         if (GetComponent<SpriteRenderer> ().size.y <= 0.00001f) {
 			GameObject.FindObjectOfType<GameManager>().GameOver ();
 		}
-	}
+
+        if (soundManager != null)
+        {
+            if (GetComponent<BoxCollider2D>().size.y > NearWinningScale)
+            {
+                soundManager.dynamicIntensityWinning();
+            }
+            else if (GetComponent<BoxCollider2D>().size.y < NearLosingScale)
+            {
+                soundManager.dynamicIntensityLosing();
+            }
+            else
+            {
+                soundManager.dynamicIntensityNeutral();
+            }
+        }
+    }
 
     public IEnumerator StartGrowTimer(float InSeconds, float GrowAmountOnHit)
     {
