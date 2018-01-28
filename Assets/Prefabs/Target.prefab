@@ -76,6 +76,9 @@ MonoBehaviour:
   YNudgeThreshold: 0.5
   XMovementSpeed: 0
   YMovementSpeed: 0
+  ScaleOscillateSpeed: 0.01
+  MinScale: 0.25
+  MaxScale: 1.5
   LowerXBound: -0.9
   UpperXBound: 0.9
   LowerYBound: -1.1

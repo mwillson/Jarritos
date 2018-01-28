@@ -24,6 +24,11 @@ public class TargetScript : MonoBehaviour {
 
     public float YMovementSpeed;
 
+    public float ScaleOscillateSpeed;
+    public float MinScale;
+    public float MaxScale;
+    private bool ScaleUp;
+
     private bool isCollidingWithOtherTarget;
 
     public float LowerXBound;
@@ -44,7 +49,28 @@ public class TargetScript : MonoBehaviour {
     public Sprite[] BreakSprites;
     public Sprite FinalBreakSprite;
 
-    public void MoveTarget()
+    public void OscillateTargetScale()
+    {
+       
+        if (ScaleOscillateSpeed != 0.0f)
+        {
+            if (ScaleUp)
+            {
+                transform.localScale += new Vector3(ScaleOscillateSpeed, ScaleOscillateSpeed, 0.0f);
+                print("LocalScale x: " + transform.localScale.x + " LocalScale y: " + transform.localScale.y);
+                if (transform.localScale.x >= MaxScale || transform.localScale.y >= MaxScale)
+                    ScaleUp = false;
+            }
+            else if (!ScaleUp)
+            {
+                transform.localScale -= new Vector3(ScaleOscillateSpeed, ScaleOscillateSpeed, 0.0f);
+                if (transform.localScale.x <= MinScale || transform.localScale.y <= MinScale)
+                    ScaleUp = true;
+            }
+        }
+    }
+
+    public void OscillateTargetPosition()
     {
         if (XMovementSpeed > 0f)
         {
@@ -154,6 +180,11 @@ public class TargetScript : MonoBehaviour {
 
         moveRight = true;
         moveUp = true;
+
+        if (transform.localScale.x < MaxScale || transform.localScale.y < MaxScale)
+            ScaleUp = true;
+        else if (transform.localScale.x > MinScale || transform.localScale.y > MinScale)
+            ScaleUp = false;
 	}
 
     void OnCollisionEnter2D(Collision2D other)
@@ -170,8 +201,12 @@ public class TargetScript : MonoBehaviour {
     void Update () {
         if (XMovementSpeed > 0f || YMovementSpeed > 0f)
         {
-            MoveTarget();
-            print(moveRight);
+            OscillateTargetPosition();
+        }
+        
+        if (ScaleOscillateSpeed != 0.0f)
+        {
+            OscillateTargetScale();
         }
 	}
 }
