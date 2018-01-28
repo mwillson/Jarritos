@@ -16,6 +16,8 @@ public class ElectroFieldScript : MonoBehaviour {
 
     public float MaxGrowthRate = 0.0005f;
 
+    public bool InertialGrowth;
+
     public UITriggerSound soundManager;
 
     // Use this for initialization
@@ -52,7 +54,10 @@ public class ElectroFieldScript : MonoBehaviour {
             {
                 //soundManager.dynamicImpulseCalm();
             }
-            ScaleRate = GrowAmountOnHit;
+            if (InertialGrowth)
+                ScaleRate += GrowAmountOnHit;
+            else
+                ScaleRate = GrowAmountOnHit;
             StackedSeconds = InSeconds;
             //Set a timer
             yield return new WaitForSeconds(StackedSeconds);
