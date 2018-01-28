@@ -236,6 +236,31 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5c7cdeec82a99424eb6dbcb31a9a0894, type: 2}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: XMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: UpperXBound
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: LowerXBound
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: YMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: isNudgeable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0
@@ -423,6 +448,31 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5c7cdeec82a99424eb6dbcb31a9a0894, type: 2}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: XMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: UpperXBound
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: LowerXBound
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: YMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: isNudgeable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0
@@ -478,6 +528,31 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5c7cdeec82a99424eb6dbcb31a9a0894, type: 2}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: XMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: UpperXBound
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: LowerXBound
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: YMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: isNudgeable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0
@@ -579,6 +654,31 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5c7cdeec82a99424eb6dbcb31a9a0894, type: 2}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: XMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: UpperXBound
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: LowerXBound
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: YMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: isNudgeable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0
@@ -591,7 +691,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4774831957854884, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.422
+      value: 0.907
       objectReference: {fileID: 0}
     - target: {fileID: 4774831957854884, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -635,6 +735,31 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 5c7cdeec82a99424eb6dbcb31a9a0894, type: 2}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: XMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: UpperXBound
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: LowerXBound
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: YMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
+        type: 2}
+      propertyPath: isNudgeable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
   m_IsPrefabParent: 0

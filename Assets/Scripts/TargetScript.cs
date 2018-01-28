@@ -11,6 +11,16 @@ public class TargetScript : MonoBehaviour {
 
     private float StackedSeconds;
 
+    public bool isNudgeable = true;
+
+    private bool moveRight = true;
+
+    private bool moveUp = true;
+
+    public float XMovementSpeed;
+
+    public float YMovementSpeed;
+
     private bool isCollidingWithOtherTarget;
 
     public float LowerXBound;
@@ -22,16 +32,54 @@ public class TargetScript : MonoBehaviour {
     //Reference to the ElectroField in the game world; defined in Start()
     public GameObject ElectroObject;
 
+    public void MoveTarget()
+    {
+        if (XMovementSpeed > 0f)
+        {
+            if (moveRight)
+            {
+                transform.Translate(new Vector3(XMovementSpeed, 0.0f, 0.0f));
+                if (transform.position.x + XMovementSpeed >= UpperXBound)
+                    moveRight = false;
+
+            }
+            else if (!moveRight)
+            {
+                transform.Translate(new Vector3(-XMovementSpeed, 0.0f, 0.0f));
+                if (transform.position.x - XMovementSpeed <= LowerXBound)
+                    moveRight = true;
+            }
+        }
+        if (YMovementSpeed > 0f)
+        {
+            if (moveUp)
+            {
+                transform.Translate(new Vector3(0.0f, YMovementSpeed, 0.0f));
+                if (transform.position.y + YMovementSpeed >= UpperYBound)
+                    moveUp = false;
+            }
+            else if (!moveUp)
+            {
+                transform.Translate(new Vector3(0.0f, -YMovementSpeed, 0.0f));
+                if (transform.position.y - YMovementSpeed <= LowerYBound)
+                    moveUp = true;
+            }
+        }
+    }
+
     public void NudgeTarget(Vector2 NudgeVector)
     {
-        if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
+        if (isNudgeable)
         {
-            if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
+            if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
             {
-                if (!isCollidingWithOtherTarget)
+                if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
                 {
-                    Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
-                    transform.Translate(TranslateVector);
+                    if (!isCollidingWithOtherTarget)
+                    {
+                        Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
+                        transform.Translate(TranslateVector);
+                    }
                 }
             }
         }
@@ -52,6 +100,9 @@ public class TargetScript : MonoBehaviour {
     {
         //Get the ElectroField from the game world
         ElectroObject = GameObject.Find("ElectroField");
+
+        moveRight = true;
+        moveUp = true;
 	}
 
     void OnCollisionEnter2D(Collision2D other)
@@ -66,6 +117,10 @@ public class TargetScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+        if (XMovementSpeed > 0f || YMovementSpeed > 0f)
+        {
+            MoveTarget();
+            print(moveRight);
+        }
 	}
 }
