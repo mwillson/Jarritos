@@ -157,6 +157,16 @@ Prefab:
       propertyPath: MaxStackedSeconds
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114525875432361824, guid: d740d12d5c060f04badd746d9ec0effe,
+        type: 2}
+      propertyPath: ShrinkRate
+      value: 0.00025
+      objectReference: {fileID: 0}
+    - target: {fileID: 114525875432361824, guid: d740d12d5c060f04badd746d9ec0effe,
+        type: 2}
+      propertyPath: ScaleRate
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d740d12d5c060f04badd746d9ec0effe, type: 2}
   m_IsPrefabParent: 0
@@ -211,6 +221,10 @@ Prefab:
     - target: {fileID: 114402853695814356, guid: 72b1071c61b08da4eb3dfa38b246291d,
         type: 2}
       propertyPath: SecondsToGrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059634102000898, guid: 72b1071c61b08da4eb3dfa38b246291d, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
