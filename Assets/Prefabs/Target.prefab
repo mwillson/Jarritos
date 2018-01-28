@@ -80,6 +80,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrowAmountOnHit: 0.00025
   SecondsToGrow: 2
+  isNudgeable: 1
+  XMovementSpeed: 0
+  YMovementSpeed: 0
+  isBreakable: 0
+  numHitsToBreak: 0
   LowerXBound: -0.9
   UpperXBound: 0.9
   LowerYBound: -1.1

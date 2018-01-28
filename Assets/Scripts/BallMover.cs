@@ -105,6 +105,10 @@ public class BallMover : MonoBehaviour {
 
         if (other.gameObject.GetComponent<TargetScript>() != null)
         {
+            if (other.gameObject.GetComponent<TargetScript>().isBreakable)
+            {
+                other.gameObject.GetComponent<TargetScript>().AddHitToTarget();
+            }
             string bouncedir = "";
             if (transform.position.y > other.transform.position.y)
             {
