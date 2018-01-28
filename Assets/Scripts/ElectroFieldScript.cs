@@ -10,6 +10,12 @@ public class ElectroFieldScript : MonoBehaviour {
     //The rate at which the field should shrink, applied to ScaleRate as a negative
     public float ShrinkRate;
 
+    private float StackedSeconds;
+
+    public float MaxStackedSeconds = 10.0f;
+
+    public float MaxGrowthRate = 0.005f;
+
     // Use this for initialization
     void Start()
     {
@@ -37,6 +43,33 @@ public class ElectroFieldScript : MonoBehaviour {
 		}
 	}
 
+    public IEnumerator StartGrowTimer(float InSeconds, float GrowAmountOnHit)
+    {
+        //Temporarily set the ElectroField to grow by GrowAmount
+        if (ScaleRate <= 0.0f)
+        {
+            ScaleRate = GrowAmountOnHit;
+            StackedSeconds = InSeconds;
+            //Set a timer
+            yield return new WaitForSeconds(StackedSeconds);
+        }
+
+        else
+        {
+            if (ScaleRate + GrowAmountOnHit <= MaxGrowthRate)
+                ScaleRate += GrowAmountOnHit;
+            if (StackedSeconds + InSeconds <= MaxStackedSeconds)
+                StackedSeconds += InSeconds;
+            //Set a timer
+            yield return new WaitForSeconds(StackedSeconds);
+            StackedSeconds -= InSeconds;
+        }
+
+        //When the timer is up, set the ElectroField to shrink again
+        if (StackedSeconds <= InSeconds)
+            ScaleRate = -ShrinkRate;
+    }
+
 	void OnTriggerExit2D(Collider2D other){
 		if (other.gameObject.GetComponent<BallMover>() != null) {
 			other.GetComponent<BallMover> ().JumpOut ();
@@ -48,5 +81,4 @@ public class ElectroFieldScript : MonoBehaviour {
 			other.GetComponent<BallMover> ().BackIn();
 		}
 	}
-
 }

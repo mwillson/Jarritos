@@ -9,6 +9,8 @@ public class TargetScript : MonoBehaviour {
     //The duration for which the above grow amount should be applied
     public float SecondsToGrow;
 
+    private float StackedSeconds;
+
     public float LowerXBound;
     public float UpperXBound;
     public float LowerYBound;
@@ -20,35 +22,23 @@ public class TargetScript : MonoBehaviour {
 
     public void NudgeTarget(Vector2 NudgeVector)
     {
-        print("NudgeX:" + NudgeVector.x);
-        print("NudgeY:" + NudgeVector.y);
         if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
         {
             if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
             {
-                print("Target nudged");
                 Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
                 transform.Translate(TranslateVector);
             }
         }
-        // todo view debug output when target is nudged
     }
 
     //Called when this target is hit by the ball
-    public IEnumerator OnTargetHit()
+    public void OnTargetHit()
     {
-        print("OnTargetHit called");
         //If we can get the ElectroFieldScript component
         if (ElectroObject.GetComponent<ElectroFieldScript>())
         {
-            //Temporarily set the ElectroField to grow by GrowAmount
-            ElectroObject.GetComponent<ElectroFieldScript>().ScaleRate = GrowAmountOnHit;
-
-            //Set a timer
-            yield return new WaitForSeconds(SecondsToGrow);
-
-            //When the timer is up, set the ElectroField to shrink again
-            ElectroObject.GetComponent<ElectroFieldScript>().ScaleRate = -ElectroObject.GetComponent<ElectroFieldScript>().ShrinkRate;
+            StartCoroutine(ElectroObject.GetComponent<ElectroFieldScript>().StartGrowTimer(SecondsToGrow, GrowAmountOnHit));
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,14 +10,17 @@ public class GameManager : MonoBehaviour {
 	public GameObject ballPrefab, targetPrefab;
 	public List<GameObject> targets;
 	public int level;
+	ElectroFieldScript efscript;
 
 	// Use this for initialization
 	void Start () {
 		level = 0;
 		targets = new List<GameObject> ();
 		electrofield = GameObject.Find ("ElectroField");
-		NewLevel (1, 4);
 		//ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
+		efscript = electrofield.GetComponent<ElectroFieldScript> ();
+		NewLevel (1, 4);
+
 	}
 	
 	// Update is called once per frame
@@ -38,8 +42,13 @@ public class GameManager : MonoBehaviour {
 	public void NewLevel(int lvl, int numtargets){
 		level = lvl;
 		Debug.Log ("New Level:"+lvl);
+		string lvlString = (lvl + 1).ToString();
+		GameObject.Find ("NextLvl").GetComponent<Text> ().text = "Next Lvl : "+lvlString+" - - - - - - - - - - - - - - - - - - - - - - - Next Lvl : "+lvlString;
 		electrofield.GetComponent<BoxCollider2D> ().offset = new Vector2(electrofield.GetComponent<BoxCollider2D> ().offset.x, 0);
 		electrofield.GetComponent<BoxCollider2D> ().size = new Vector2(electrofield.GetComponent<BoxCollider2D> ().size.x, 1.4f);
+		efscript.ScaleRate = 0f;
+		efscript.StartGrowTimer (0f, 0f);
+		efscript.ShrinkRate += .0001f;
 		SpawnTargets (numtargets);
 		RespawnBall ();
 	}

@@ -126,7 +126,7 @@ public class BallMover : MonoBehaviour {
             }
             Bounce(bouncedir);
 
-            StartCoroutine(other.gameObject.GetComponent<TargetScript>().OnTargetHit());
+            other.gameObject.GetComponent<TargetScript>().OnTargetHit();
             Vector2 VectorToNudge = new Vector2();
             float BaseNudge = other.gameObject.GetComponent<TargetScript>().BaseNudgeAmount;
 
@@ -137,7 +137,7 @@ public class BallMover : MonoBehaviour {
             }
             if (direction.y != 0.0f)
             {
-                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (1.0f) : (-1.0f));
+                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (0.0f) : (-1.0f));
             }
 
             other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);

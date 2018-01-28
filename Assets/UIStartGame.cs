@@ -17,7 +17,12 @@ public class UIStartGame : MonoBehaviour {
 
     public void onClick()
     {
-        SceneManager.LoadScene("Scenes/win", LoadSceneMode.Single);
+        SceneManager.LoadScene("Scenes/marktest", LoadSceneMode.Single);
+    }
+
+    public void soundTest()
+    {
+        SceneManager.LoadScene("Scenes/soundboard", LoadSceneMode.Single);
     }
 
 }
