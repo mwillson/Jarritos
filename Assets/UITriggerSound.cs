@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UITriggerSound : MonoBehaviour {
 
@@ -88,6 +89,10 @@ public class UITriggerSound : MonoBehaviour {
     public void cueMusic8()
     {
         nextMusicCue = music8;
+    }
+    public void backToTitle()
+    {
+        SceneManager.LoadScene("Scenes/title", LoadSceneMode.Single);
     }
 
 }

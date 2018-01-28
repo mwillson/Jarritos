@@ -20,4 +20,9 @@ public class UIStartGame : MonoBehaviour {
         SceneManager.LoadScene("Scenes/marktest", LoadSceneMode.Single);
     }
 
+    public void soundTest()
+    {
+        SceneManager.LoadScene("Scenes/soundboard", LoadSceneMode.Single);
+    }
+
 }
