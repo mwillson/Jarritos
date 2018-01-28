@@ -14,6 +14,8 @@ public class ElectroFieldScript : MonoBehaviour {
 
     public float MaxStackedSeconds = 10.0f;
 
+    public float MaxGrowthRate = 0.005f;
+
     // Use this for initialization
     void Start()
     {
@@ -54,7 +56,8 @@ public class ElectroFieldScript : MonoBehaviour {
 
         else
         {
-            ScaleRate += GrowAmountOnHit;
+            if (ScaleRate + GrowAmountOnHit <= MaxGrowthRate)
+                ScaleRate += GrowAmountOnHit;
             if (StackedSeconds + InSeconds <= MaxStackedSeconds)
                 StackedSeconds += InSeconds;
             //Set a timer
