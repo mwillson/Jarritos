@@ -174,11 +174,11 @@ public class BallMover : MonoBehaviour {
             if (direction.x != 0.0f)
             {
                 //Set the nudge vector to BaseNudge times the sign (- or +) of the velocity of that particular axis
-                VectorToNudge.x = -BaseNudge * ((direction.x > 0.0f) ? (1.0f) : (-1.0f));
+                VectorToNudge.x = -BaseNudge * ((transform.position.x > other.transform.position.x) ? (1.0f) : (-1.0f));
             }
             if (direction.y != 0.0f)
             {
-                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (0.0f) : (-1.0f));
+                VectorToNudge.y = -BaseNudge * ((transform.position.y < other.gameObject.transform.position.y) ? (-1.0f) : (0.0f));
             }
 
             other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);

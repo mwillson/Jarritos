@@ -81,13 +81,19 @@ public class TargetScript : MonoBehaviour {
         {
             if (transform.position.x + NudgeVector.x > LowerXBound && transform.position.x + NudgeVector.x < UpperXBound)
             {
-                if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
+                if (!isCollidingWithOtherTarget)
                 {
-                    if (!isCollidingWithOtherTarget)
-                    {
-                        Vector3 TranslateVector = new Vector3(NudgeVector.x, NudgeVector.y, 0.0f);
-                        transform.Translate(TranslateVector);
-                    }
+                    Vector3 TranslateVector = new Vector3(NudgeVector.x, 0.0f, 0.0f);
+                    transform.Translate(TranslateVector);
+                }
+            }
+
+            if (transform.position.y + NudgeVector.y > LowerYBound && transform.position.y + NudgeVector.y < UpperYBound)
+            {
+                if (!isCollidingWithOtherTarget)
+                {
+                    Vector3 TranslateVector = new Vector3(0.0f, NudgeVector.y, 0.0f);
+                    transform.Translate(TranslateVector);
                 }
             }
         }
