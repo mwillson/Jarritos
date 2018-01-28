@@ -51,33 +51,17 @@ public class BallMover : MonoBehaviour {
 		}
 		float newx = direction.x * xchange;
 		float newy = direction.y * ychange;
-		Debug.Log ("old dir:" + direction);
+		//Debug.Log ("old dir:" + direction);
 		direction = new Vector3 (newx, newy, 0f);
-		Debug.Log ("new dir: " + direction);
+		//Debug.Log ("new dir: " + direction);
 	}
 
-	void OnCollisionEnter2D(Collision2D other){
-        if (other.gameObject.GetComponent<TargetScript>())
-        {
-            print("OtherGameObject has TargetScript");
-            StartCoroutine(other.gameObject.GetComponent<TargetScript>().OnTargetHit());
-            Vector2 VectorToNudge = new Vector2(0.0f, 0.0f);
-
-            float BaseNudge = other.gameObject.GetComponent<TargetScript>().BaseNudgeAmount;
-            
-            if (myRB.velocity.x != 0.0f)
-            {
-                //Set the nudge vector to BaseNudge times the sign (- or +) of the velocity of that particular axis
-                VectorToNudge.x = BaseNudge * ((myRB.velocity.x > 0.0f) ? (1.0f) : (-1.0f));
-            }
-            if (myRB.velocity.y != 0.0f)
-            {
-                VectorToNudge.y = BaseNudge * ((myRB.velocity.y > 0.0f) ? (1.0f) : (-1.0f));
-            }
-            other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);
-        }
+    void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.transform.parent != null)
         {
+
+
             if (other.transform.parent.name == "BG")
             {
                 string bouncedir = "";
@@ -85,8 +69,9 @@ public class BallMover : MonoBehaviour {
                 switch (other.gameObject.name)
                 {
                     case "Bottom":
-                        bouncedir = "horizontal";
-                        break;
+                        //special case
+                        GameObject.FindObjectOfType<GameManager>().RespawnBall();
+                        return;
                     case "Top":
                         bouncedir = "horizontal";
                         break;
@@ -97,6 +82,7 @@ public class BallMover : MonoBehaviour {
                         bouncedir = "vertical";
                         break;
                     case "Paddle":
+
                         bouncedir = "horizontal";
                         break;
                 }
@@ -105,9 +91,16 @@ public class BallMover : MonoBehaviour {
         }
         else if (other.gameObject.name == "Paddle")
         {
+            //if ball collided below paddle, DONT BOUNCE. just return, keep it on it's trajectory
+
+            if (transform.position.y < other.transform.position.y)
+                return;
+			float xOffset = (transform.position.x - other.transform.position.x)*2f;
+			direction.x += xOffset;
             Bounce("horizontal");
         }
-        else if (other.gameObject.GetComponent<TargetScript>())
+
+        if (other.gameObject.GetComponent<TargetScript>() != null)
         {
             string bouncedir = "";
             if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
@@ -124,8 +117,24 @@ public class BallMover : MonoBehaviour {
             {
                 bouncedir = "horizontal";
             }
-        }
+            Bounce(bouncedir);
 
+            StartCoroutine(other.gameObject.GetComponent<TargetScript>().OnTargetHit());
+            Vector2 VectorToNudge = new Vector2();
+            float BaseNudge = other.gameObject.GetComponent<TargetScript>().BaseNudgeAmount;
+
+            if (direction.x != 0.0f)
+            {
+                //Set the nudge vector to BaseNudge times the sign (- or +) of the velocity of that particular axis
+                VectorToNudge.x = -BaseNudge * ((direction.x > 0.0f) ? (1.0f) : (-1.0f));
+            }
+            if (direction.y != 0.0f)
+            {
+                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (1.0f) : (-1.0f));
+            }
+
+            other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);
+        }
     }
 		
 	public void BackIn(){

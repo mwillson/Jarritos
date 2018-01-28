@@ -31,11 +31,13 @@ public class TargetScript : MonoBehaviour {
                 transform.Translate(TranslateVector);
             }
         }
+        // todo view debug output when target is nudged
     }
 
     //Called when this target is hit by the ball
     public IEnumerator OnTargetHit()
     {
+        print("OnTargetHit called");
         //If we can get the ElectroFieldScript component
         if (ElectroObject.GetComponent<ElectroFieldScript>())
         {
