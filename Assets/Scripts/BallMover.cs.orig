@@ -142,6 +142,13 @@ public class BallMover : MonoBehaviour {
 
         if (other.gameObject.GetComponent<TargetScript>() != null)
         {
+<<<<<<< HEAD
+            string bouncedir = "";
+            if (transform.position.y > other.transform.position.y)
+            {
+                bouncedir = "ontop";
+            }
+=======
             if (other.gameObject.GetComponent<TargetScript>().isBreakable)
             {
                 other.gameObject.GetComponent<TargetScript>().AddHitToTarget();
@@ -151,6 +158,7 @@ public class BallMover : MonoBehaviour {
             {
                 bouncedir = "ontop";
             }
+>>>>>>> 5ab0cafbc258bb8aa0ea1684ed9d96d8559deb7c
             else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
             {
                 bouncedir = "horizontal";

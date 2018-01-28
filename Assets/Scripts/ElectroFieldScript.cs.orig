@@ -47,11 +47,15 @@ public class ElectroFieldScript : MonoBehaviour {
     {
         //Temporarily set the ElectroField to grow by GrowAmount
         if (ScaleRate <= 0.0f)
+<<<<<<< HEAD
+        {
+=======
         {
             if (soundManager != null)
             {
                 //soundManager.dynamicImpulseCalm();
             }
+>>>>>>> 5ab0cafbc258bb8aa0ea1684ed9d96d8559deb7c
             ScaleRate = GrowAmountOnHit;
             StackedSeconds = InSeconds;
             //Set a timer

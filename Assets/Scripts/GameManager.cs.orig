@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+<<<<<<< HEAD
 	GameObject ball, electrofield;
 	public GameObject ballPrefab, targetPrefab;
 	public List<GameObject> targets;
 	public int level;
 	ElectroFieldScript efscript;
-    public UITriggerSound soundManager;
 
 	// Use this for initialization
 	void Start () {
@@ -22,15 +22,30 @@ public class GameManager : MonoBehaviour {
 		efscript = electrofield.GetComponent<ElectroFieldScript> ();
 		NewLevel (1, 4);
 
+=======
+	GameObject ball;
+	public GameObject ballPrefab;
+    public UITriggerSound soundManager;
+
+	// Use this for initialization
+	void Start () {
+		ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
         if (soundManager != null)
         {
             soundManager.cueDynamicBegin();
         }
+>>>>>>> 5ab0cafbc258bb8aa0ea1684ed9d96d8559deb7c
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+<<<<<<< HEAD
+	public void RespawnBall(){
+		if (ball != null) {
+			Destroy (ball);
+		}
+=======
         //Debug.Log(ball.transform.localPosition.y);
         if (ball.transform.localPosition.y > 0.25)
         {
@@ -44,9 +59,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RespawnBall(){
-		if (ball != null) {
-			Destroy (ball);
-		}
+		Destroy (ball);
+>>>>>>> 5ab0cafbc258bb8aa0ea1684ed9d96d8559deb7c
 		ball = Instantiate (ballPrefab, new Vector3(0f,0f), transform.rotation);
     }
 
