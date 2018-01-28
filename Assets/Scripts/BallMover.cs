@@ -56,43 +56,86 @@ public class BallMover : MonoBehaviour {
 		//Debug.Log ("new dir: " + direction);
 	}
 
-	void OnCollisionEnter2D(Collision2D other){
-		if (other.transform.parent != null) {
-			if (other.transform.parent.name == "BG") {
-				string bouncedir = "";
-				Debug.Log (other.gameObject.name);
-				switch (other.gameObject.name) {
-				case"Bottom":
-					//special case
-					GameObject.FindObjectOfType<GameManager> ().RespawnBall ();
-					return;
-				case"Top":
-					bouncedir = "horizontal";
-					break;
-				case"Left":
-					bouncedir = "vertical";
-					break;
-				case"Right":
-					bouncedir = "vertical";
-					break;
-				case "Paddle":
-					
-					bouncedir = "horizontal";
-					break;
-				}
-				Bounce (bouncedir);
-			}
-		} else if (other.gameObject.name == "Paddle") {
-			//if ball collided below paddle, DONT BOUNCE. just return, keep it on it's trajectory
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.parent != null)
+        {
 
-			if (transform.position.y < other.transform.position.y)
-				return;
+
+            if (other.transform.parent.name == "BG")
+            {
+                string bouncedir = "";
+                Debug.Log(other.gameObject.name);
+                switch (other.gameObject.name)
+                {
+                    case "Bottom":
+                        //special case
+                        GameObject.FindObjectOfType<GameManager>().RespawnBall();
+                        return;
+                    case "Top":
+                        bouncedir = "horizontal";
+                        break;
+                    case "Left":
+                        bouncedir = "vertical";
+                        break;
+                    case "Right":
+                        bouncedir = "vertical";
+                        break;
+                    case "Paddle":
+
+                        bouncedir = "horizontal";
+                        break;
+                }
+                Bounce(bouncedir);
+            }
+        }
+        else if (other.gameObject.name == "Paddle")
+        {
+            //if ball collided below paddle, DONT BOUNCE. just return, keep it on it's trajectory
+
+            if (transform.position.y < other.transform.position.y)
+                return;
 			float xOffset = (transform.position.x - other.transform.position.x)*2f;
 			direction.x += xOffset;
-			Bounce ("horizontal");
-		}
+            Bounce("horizontal");
+        }
 
-	}
+        if (other.gameObject.GetComponent<TargetScript>() != null)
+        {
+            string bouncedir = "";
+            if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) - Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y) < -0.1f)
+            {
+                bouncedir = "horizontal";
+                Bounce(bouncedir);
+                bouncedir = "vertical";
+            }
+            else if (Mathf.Abs(other.transform.position.x) - Mathf.Abs(transform.position.x) > Mathf.Abs(other.transform.position.y) - Mathf.Abs(transform.position.y))
+            {
+                bouncedir = "vertical";
+            }
+            else
+            {
+                bouncedir = "horizontal";
+            }
+            Bounce(bouncedir);
+
+            other.gameObject.GetComponent<TargetScript>().OnTargetHit();
+            Vector2 VectorToNudge = new Vector2();
+            float BaseNudge = other.gameObject.GetComponent<TargetScript>().BaseNudgeAmount;
+
+            if (direction.x != 0.0f)
+            {
+                //Set the nudge vector to BaseNudge times the sign (- or +) of the velocity of that particular axis
+                VectorToNudge.x = -BaseNudge * ((direction.x > 0.0f) ? (1.0f) : (-1.0f));
+            }
+            if (direction.y != 0.0f)
+            {
+                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (1.0f) : (-1.0f));
+            }
+
+            other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);
+        }
+    }
 		
 	public void BackIn(){
 		if (outOfField) {
