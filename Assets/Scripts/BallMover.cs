@@ -130,7 +130,7 @@ public class BallMover : MonoBehaviour {
             }
             if (direction.y != 0.0f)
             {
-                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (1.0f) : (-1.0f));
+                VectorToNudge.y = -BaseNudge * ((direction.y > 0.0f) ? (0.0f) : (-1.0f));
             }
 
             other.gameObject.GetComponent<TargetScript>().NudgeTarget(VectorToNudge);
