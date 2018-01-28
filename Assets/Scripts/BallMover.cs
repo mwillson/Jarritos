@@ -87,6 +87,8 @@ public class BallMover : MonoBehaviour {
 
 			if (transform.position.y < other.transform.position.y)
 				return;
+			float xOffset = (transform.position.x - other.transform.position.x)*2f;
+			direction.x += xOffset;
 			Bounce ("horizontal");
 		}
 
